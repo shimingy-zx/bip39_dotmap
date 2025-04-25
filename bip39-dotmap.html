@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIP39 Dotmap Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .output {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>BIP39 Dotmap Generator</h1>
+  <p>Paste your BIP39 mnemonic phrase below:</p>
+  <textarea id="mnemonicInput"></textarea>
+  <br>
+  <button onclick="generateDotmap()">Generate Dotmap</button>
+  <div class="output" id="output"></div>
+
+  <script>
+    async function fetchWordlist() {
+      const response = await fetch('https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt');
+      const text = await response.text();
+      return text.split('\n').filter(Boolean);
+    }
+
+    function numberToDots(n) {
+      let binary = n.toString(2).padStart(11, '0');
+      binary = '0' + binary;
+      const dots = binary.split('').map(bit => bit === '1' ? '●' : '○');
+      return `${dots.slice(0, 4).join('')} | ${dots.slice(4, 8).join('')} | ${dots.slice(8, 12).join('')}`;
+    }
+
+    async function generateDotmap() {
+      const input = document.getElementById('mnemonicInput').value.trim().toLowerCase();
+      const words = input.split(/\s+/);
+      const wordlist = await fetchWordlist();
+
+      let output = 'Index | Word       | Column1 | Column2 | Column3\n';
+      output += '------------------------------------------------\n';
+
+      for (const word of words) {
+        const index = wordlist.indexOf(word);
+        if (index === -1) {
+          output += `???   | ${word} (Not found)\n`;
+          continue;
+        }
+        const dotmap = numberToDots(index);
+        const [col1, col2, col3] = dotmap.split('|').map(s => s.trim());
+        output += `${String(index + 1).padEnd(5)} | ${word.padEnd(10)} | ${col1} | ${col2} | ${col3}\n`;
+      }
+
+      document.getElementById('output').innerText = output;
+    }
+  </script>
+</body>
+
+</html>
