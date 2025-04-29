@@ -412,6 +412,7 @@
 
       .dotmap-container {
         padding: 16px 12px;
+        overflow-x: auto;
       }
 
       .word-index {
@@ -429,6 +430,18 @@
         margin-right: -10px;
         width: calc(100% + 20px);
       }
+
+      /* 改善移动端点阵图显示 */
+      .grid-cell {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+      }
+
+      .grid-dot {
+        width: 12px;
+        height: 12px;
+      }
     }
 
     /* 针对更小屏幕的设备（如iPhone SE等） */
@@ -442,18 +455,50 @@
       }
 
       .word-index {
-        width: 32px;
-        height: 32px;
-        font-size: 0.9rem;
+        width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+        margin-right: 8px;
       }
 
       .word-text {
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
 
       .word-details {
-        padding-left: 42px;
+        padding-left: 36px;
         font-size: 0.8rem;
+      }
+
+      /* 更小屏幕的点阵图调整 */
+      .grid-cell {
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+        margin-right: 2px;
+      }
+
+      .grid-dot {
+        width: 10px;
+        height: 10px;
+      }
+
+      /* 调整行标签 */
+      [class^="rowLabel"] {
+        width: 25px;
+        margin-right: 8px;
+        font-size: 0.8rem;
+      }
+
+      /* 调整单词容器 */
+      [class^="wordContainer"] {
+        margin-left: 8px;
+      }
+
+      /* 调整单词索引单元格 */
+      [class^="wordIndexCell"] {
+        width: 35px;
+        font-size: 0.85rem;
       }
     }
   </style>
@@ -713,129 +758,6 @@
       return binary.split('').map(bit => bit === '1');
     }
 
-    function createDotmapElement(word, index, binaryArray) {
-      const container = document.createElement('div');
-      container.className = 'dotmap-container';
-
-      // 单词信息部分
-      const wordInfo = document.createElement('div');
-      wordInfo.className = 'word-info';
-
-      const wordIndex = document.createElement('div');
-      wordIndex.className = 'word-index';
-      wordIndex.textContent = index + 1;
-
-      const wordText = document.createElement('div');
-      wordText.className = 'word-text';
-      wordText.textContent = word;
-
-      wordInfo.appendChild(wordIndex);
-      wordInfo.appendChild(wordText);
-      container.appendChild(wordInfo);
-
-      // 创建点阵图容器
-      const dotmapContainer = document.createElement('div');
-      dotmapContainer.className = 'dotmap-grid-container';
-      dotmapContainer.style.overflowX = 'auto';
-      dotmapContainer.style.paddingBottom = '10px';
-      dotmapContainer.style.marginTop = '10px';
-
-      // 创建内部容器以保持内容居中
-      const innerContainer = document.createElement('div');
-      innerContainer.style.display = 'flex';
-      innerContainer.style.minWidth = 'fit-content';
-
-      // 创建水平布局的点阵图
-      const dotmapRow = document.createElement('div');
-      dotmapRow.style.display = 'flex';
-      dotmapRow.style.justifyContent = 'flex-start';
-      dotmapRow.style.alignItems = 'flex-start';
-
-      // 定义二进制位的值
-      const powers = [2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1];
-
-      // 每4个一组，共3组
-      for (let group = 0; group < 3; group++) {
-        // 创建每组的容器（垂直布局：标签在上，点阵在下）
-        const groupContainer = document.createElement('div');
-        groupContainer.style.display = 'flex';
-        groupContainer.style.flexDirection = 'column';
-        groupContainer.style.marginRight = group < 2 ? '12px' : '0'; // 组间距
-
-        // 创建标签行
-        const labelGroup = document.createElement('div');
-        labelGroup.style.display = 'flex';
-        labelGroup.style.justifyContent = 'space-between';
-        labelGroup.style.marginBottom = '4px';
-
-        // 创建点阵行
-        const cellGroup = document.createElement('div');
-        cellGroup.style.display = 'flex';
-
-        // 每组4个格子
-        for (let j = 0; j < 4; j++) {
-          const i = group * 4 + j;
-
-          // 创建标签
-          const label = document.createElement('div');
-          label.textContent = powers[i];
-          label.style.textAlign = 'center';
-          label.style.fontSize = '0.75rem';
-          label.style.color = 'var(--light-text)';
-          label.style.width = '24px';
-          label.style.flexShrink = '0';
-          label.style.margin = '0 1px';
-          label.style.writingMode = 'vertical-rl';
-          label.style.transform = 'rotate(180deg)';
-          label.style.height = '28px';
-          label.style.display = 'flex';
-          label.style.alignItems = 'center';
-          label.style.justifyContent = 'center';
-          labelGroup.appendChild(label);
-
-          // 创建格子
-          const cell = document.createElement('div');
-          cell.className = 'grid-cell';
-          cell.style.width = '24px';
-          cell.style.height = '24px';
-          cell.style.border = '1px solid var(--border-color)';
-          cell.style.display = 'flex';
-          cell.style.alignItems = 'center';
-          cell.style.justifyContent = 'center';
-          cell.style.borderRadius = '4px';
-          cell.style.flexShrink = '0';
-          cell.style.margin = '0 1px';
-
-          // 如果位为1，添加一个点
-          if (binaryArray[i]) {
-            const dot = document.createElement('div');
-            dot.className = 'grid-dot';
-            dot.style.width = '12px';
-            dot.style.height = '12px';
-            dot.style.borderRadius = '50%';
-            dot.style.backgroundColor = 'var(--secondary-color)';
-            dot.style.boxShadow = '0 1px 3px rgba(16, 185, 129, 0.3)';
-            cell.appendChild(dot);
-          }
-
-          cellGroup.appendChild(cell);
-        }
-
-        // 将标签行和点阵行添加到组容器中
-        groupContainer.appendChild(labelGroup);
-        groupContainer.appendChild(cellGroup);
-
-        // 将组容器添加到水平布局中
-        dotmapRow.appendChild(groupContainer);
-      }
-
-      // 将水平布局添加到内部容器
-      innerContainer.appendChild(dotmapRow);
-      dotmapContainer.appendChild(innerContainer);
-      container.appendChild(dotmapContainer);
-
-      return container;
-    }
 
     function generateDotmap() {
       const input = document.getElementById('mnemonicInput').value.trim().toLowerCase();
@@ -845,7 +767,6 @@
       }
 
       const words = input.split(/\s+/);
-
 
       if (wordlist.length === 0) return;
 
@@ -859,22 +780,193 @@
       outputHeader.style.display = 'flex';
 
       let hasValidWords = false;
+      let invalidWords = [];
 
-      for (const word of words) {
+      // 定义二进制位的值
+      const powers = [2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1];
+
+      // 检测是否为小屏幕设备
+      const isSmallScreen = window.innerWidth <= 480;
+      const isVerySmallScreen = window.innerWidth <= 375;
+
+      // 根据屏幕大小设置尺寸
+      const cellWidth = isVerySmallScreen ? '18px' : (isSmallScreen ? '22px' : '28px');
+      const cellHeight = isVerySmallScreen ? '18px' : (isSmallScreen ? '22px' : '28px');
+      const dotSize = isVerySmallScreen ? '10px' : (isSmallScreen ? '12px' : '14px');
+      const marginLeft = isVerySmallScreen ? '35px' : (isSmallScreen ? '45px' : '55px');
+      const marginRight = isVerySmallScreen ? '8px' : (isSmallScreen ? '10px' : '15px');
+      const fontSize = isVerySmallScreen ? '0.8rem' : (isSmallScreen ? '0.9rem' : '1rem');
+
+      // 创建表格容器
+      const tableContainer = document.createElement('div');
+      tableContainer.className = 'dotmap-container';
+
+      // 添加二进制位的值（只在第一行添加）
+      const binaryValuesRow = document.createElement('div');
+      binaryValuesRow.style.display = 'flex';
+      binaryValuesRow.style.marginBottom = '5px';
+      binaryValuesRow.style.marginLeft = marginLeft;
+
+      powers.forEach((power, i) => {
+        const valueCell = document.createElement('div');
+        valueCell.textContent = power;
+        valueCell.style.width = cellWidth;
+        valueCell.style.textAlign = 'center';
+        valueCell.style.fontSize = fontSize;
+        valueCell.style.color = 'var(--light-text)';
+        valueCell.style.fontWeight = '500';
+        valueCell.style.writingMode = 'vertical-rl';
+        valueCell.style.transform = 'rotate(180deg)';
+        valueCell.style.height = isSmallScreen ? '40px' : '60px';
+        valueCell.style.boxSizing = 'border-box';
+        valueCell.style.display = 'flex';
+        valueCell.style.alignItems = 'center';
+        valueCell.style.justifyContent = 'flex-start';
+
+        // 每4个单元格后添加间隙（除了最后一个）
+        if ((i + 1) % 4 === 0 && i < powers.length - 1) {
+          valueCell.style.marginRight = marginRight;
+        }
+
+        binaryValuesRow.appendChild(valueCell);
+      });
+
+      tableContainer.appendChild(binaryValuesRow);
+
+      // 处理每个单词
+      words.forEach((word, rowIndex) => {
         const index = wordlist.indexOf(word);
         if (index === -1) {
-          // 处理未找到的单词
-          const notFoundElement = document.createElement('div');
-          notFoundElement.className = 'dotmap-container';
-          notFoundElement.innerHTML = `<div class="word-info"><div class="word-text" style="color:#ef4444">"${word}" - 未找到该词</div></div>`;
-          outputContent.appendChild(notFoundElement);
-          continue;
+          invalidWords.push(word);
+          return;
         }
 
         hasValidWords = true;
         const binaryArray = getBinaryArray(index + 1);
-        const dotmapElement = createDotmapElement(word, index, binaryArray);
-        outputContent.appendChild(dotmapElement);
+
+        // 创建行
+        const row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.alignItems = 'center';
+
+        // 在小屏幕上添加横向滚动
+        if (isSmallScreen) {
+          row.style.minWidth = 'max-content';
+        }
+
+        // 每4个单词添加间隙（除了第一组）
+        if (rowIndex > 0 && rowIndex % 4 === 0) {
+          row.style.marginTop = isVerySmallScreen ? '10px' : '15px';
+        }
+
+        // 添加行标签（序号）
+        const rowLabel = document.createElement('div');
+        rowLabel.className = 'rowLabel';
+        rowLabel.style.width = isVerySmallScreen ? '25px' : (isSmallScreen ? '30px' : '40px');
+        rowLabel.style.marginRight = marginRight;
+        rowLabel.style.display = 'flex';
+        rowLabel.style.justifyContent = 'center';
+        rowLabel.style.alignItems = 'center';
+        rowLabel.style.fontSize = isVerySmallScreen ? '0.8rem' : (isSmallScreen ? '0.85rem' : '0.9rem');
+        rowLabel.style.color = 'var(--light-text)';
+        rowLabel.style.fontWeight = '500';
+        rowLabel.textContent = rowIndex + 1;
+        row.appendChild(rowLabel);
+
+        // 添加点阵单元格
+        powers.forEach((_, i) => {
+          const cell = document.createElement('div');
+          cell.className = 'grid-cell';
+          cell.style.width = cellWidth;
+          cell.style.height = cellHeight;
+          cell.style.border = '1px solid var(--border-color)';
+          cell.style.display = 'flex';
+          cell.style.alignItems = 'center';
+          cell.style.justifyContent = 'center';
+          cell.style.borderRadius = '4px';
+          cell.style.margin = '0';
+          cell.style.boxSizing = 'border-box';
+
+          // 确保单元格不会缩小
+          cell.style.minWidth = cellWidth;
+          cell.style.minHeight = cellHeight;
+
+          // 每4个单元格后添加间隙（除了最后一个）
+          if ((i + 1) % 4 === 0 && i < powers.length - 1) {
+            cell.style.marginRight = marginRight;
+          }
+
+          // 如果位为1，添加一个点
+          if (binaryArray[i]) {
+            const dot = document.createElement('div');
+            dot.className = 'grid-dot';
+            dot.style.width = dotSize;
+            dot.style.height = dotSize;
+            dot.style.borderRadius = '50%';
+            dot.style.backgroundColor = 'var(--secondary-color)';
+            dot.style.boxShadow = '0 1px 3px rgba(16, 185, 129, 0.3)';
+            cell.appendChild(dot);
+          }
+
+          row.appendChild(cell);
+        });
+
+        // 添加单词索引和文本
+        const wordContainer = document.createElement('div');
+        wordContainer.className = 'wordContainer';
+        wordContainer.style.display = 'flex';
+        wordContainer.style.alignItems = 'center';
+        wordContainer.style.marginLeft = isVerySmallScreen ? '8px' : (isSmallScreen ? '10px' : '15px');
+
+        // 添加单词索引
+        const wordIndexCell = document.createElement('div');
+        wordIndexCell.className = 'wordIndexCell';
+        wordIndexCell.style.marginRight = isVerySmallScreen ? '5px' : (isSmallScreen ? '8px' : '10px');
+        wordIndexCell.style.fontSize = fontSize;
+        wordIndexCell.style.fontWeight = '500';
+        wordIndexCell.style.color = 'var(--light-text)';
+        wordIndexCell.style.width = isVerySmallScreen ? '35px' : (isSmallScreen ? '40px' : '45px'); // 设置固定宽度
+        wordIndexCell.style.textAlign = 'right'; // 右对齐
+        wordIndexCell.textContent = index + 1; // 索引值从0开始，显示时+1
+        wordContainer.appendChild(wordIndexCell);
+
+        // 添加单词文本
+        const wordCell = document.createElement('div');
+        wordCell.style.fontSize = fontSize;
+        wordCell.style.fontWeight = '500';
+        wordCell.textContent = word;
+        wordContainer.appendChild(wordCell);
+
+        row.appendChild(wordContainer);
+
+        tableContainer.appendChild(row);
+      });
+
+      outputContent.appendChild(tableContainer);
+
+      // 处理无效单词
+      if (invalidWords.length > 0) {
+        const invalidWordsContainer = document.createElement('div');
+        invalidWordsContainer.className = 'dotmap-container';
+        invalidWordsContainer.style.marginTop = '20px';
+
+        const invalidTitle = document.createElement('div');
+        invalidTitle.style.fontSize = '1.1rem';
+        invalidTitle.style.fontWeight = '600';
+        invalidTitle.style.marginBottom = '10px';
+        invalidTitle.style.color = '#ef4444';
+        invalidTitle.textContent = '无效的单词：';
+        invalidWordsContainer.appendChild(invalidTitle);
+
+        invalidWords.forEach(word => {
+          const wordElement = document.createElement('div');
+          wordElement.style.marginBottom = '5px';
+          wordElement.style.color = '#ef4444';
+          wordElement.textContent = `"${word}" - 未找到该词`;
+          invalidWordsContainer.appendChild(wordElement);
+        });
+
+        outputContent.appendChild(invalidWordsContainer);
       }
 
       if (!hasValidWords) {
