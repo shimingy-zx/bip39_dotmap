@@ -19,6 +19,114 @@
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     }
 
+    /* 点阵图生成器样式 */
+    .binary-values-row {
+      display: flex;
+      margin-bottom: 5px;
+      margin-left: 55px;
+    }
+
+    .binary-value-cell {
+      width: 28px;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--light-text);
+      font-weight: 500;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      height: 60px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .binary-value-cell-gap {
+      margin-right: 15px;
+    }
+
+    .word-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .word-row-gap {
+      margin-top: 15px;
+    }
+
+    .row-label {
+      width: 40px;
+      margin-right: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--light-text);
+      font-weight: 500;
+    }
+
+    .grid-cell {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      margin: 0;
+      box-sizing: border-box;
+      min-width: 28px;
+      min-height: 28px;
+    }
+
+    .grid-cell-gap {
+      margin-right: 15px;
+    }
+
+    .grid-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+      box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+    }
+
+    .word-container {
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+    }
+
+    .word-index-cell {
+      margin-right: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--light-text);
+      width: 45px;
+      text-align: right;
+    }
+
+    .word-text-cell {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .invalid-words-container {
+      margin-top: 20px;
+    }
+
+    .invalid-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #ef4444;
+    }
+
+    .invalid-word {
+      margin-bottom: 5px;
+      color: #ef4444;
+    }
+
     body {
       font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
       padding: 0;
@@ -326,6 +434,40 @@
       text-align: center;
     }
 
+    /* 平板电脑和小型笔记本 */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .container {
+        padding: 30px 24px;
+        margin: 30px auto;
+        max-width: 90%;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .grid-sections-container {
+        flex-wrap: wrap;
+      }
+
+      .grid-section {
+        margin-bottom: 10px;
+      }
+
+      .binary-values-row {
+        margin-left: 45px;
+      }
+
+      .binary-values {
+        margin-left: 45px;
+      }
+
+      .grid-container {
+        margin-left: 45px;
+      }
+    }
+
+    /* 大型手机和小型平板 */
     @media (max-width: 768px) {
       .container {
         padding: 24px 16px;
@@ -381,8 +523,87 @@
         width: 100%;
         justify-content: space-between;
       }
+
+      /* 改善平板和大型手机的点阵图显示 */
+      .binary-values-row {
+        margin-left: 40px;
+      }
+
+      .binary-values {
+        margin-left: 40px;
+      }
+
+      .grid-container {
+        margin-left: 40px;
+      }
+
+      .row-label {
+        width: 35px;
+        margin-right: 10px;
+      }
+
+      .word-container {
+        margin-left: 10px;
+      }
     }
 
+    /* 折叠屏和中型手机 */
+    @media (max-width: 600px) and (min-width: 481px) {
+      .container {
+        padding: 20px 14px;
+        margin: 15px auto;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      .word-info {
+        flex-wrap: wrap;
+      }
+
+      .binary-values-row {
+        margin-left: 35px;
+      }
+
+      .binary-values {
+        margin-left: 35px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .grid-container {
+        margin-left: 35px;
+      }
+
+      .row-label {
+        width: 30px;
+        margin-right: 8px;
+      }
+
+      .dotmap-container {
+        padding: 18px 14px;
+        overflow-x: auto;
+      }
+
+      /* 改善折叠屏点阵图显示 */
+      .grid-cell {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+      }
+
+      .grid-dot {
+        width: 13px;
+        height: 13px;
+      }
+
+      .word-container {
+        margin-left: 8px;
+      }
+    }
+
+    /* 小型手机 */
     @media (max-width: 480px) {
       .container {
         padding: 16px 12px;
@@ -402,12 +623,27 @@
         margin-top: 5px;
         width: 100%;
         text-align: left;
-        padding-left: 55px;
+        padding-left: 45px;
+      }
+
+      .binary-values-row {
+        margin-left: 30px;
       }
 
       .binary-values {
+        margin-left: 30px;
         overflow-x: auto;
         padding-bottom: 5px;
+      }
+
+      .grid-container {
+        margin-left: 30px;
+      }
+
+      .row-label {
+        width: 25px;
+        margin-right: 8px;
+        font-size: 0.85rem;
       }
 
       .dotmap-container {
@@ -442,6 +678,15 @@
         width: 12px;
         height: 12px;
       }
+
+      .word-container {
+        margin-left: 5px;
+      }
+
+      .word-index-cell {
+        width: 35px;
+        font-size: 0.9rem;
+      }
     }
 
     /* 针对更小屏幕的设备（如iPhone SE等） */
@@ -471,6 +716,18 @@
       }
 
       /* 更小屏幕的点阵图调整 */
+      .binary-values-row {
+        margin-left: 25px;
+      }
+
+      .binary-values {
+        margin-left: 25px;
+      }
+
+      .grid-container {
+        margin-left: 25px;
+      }
+
       .grid-cell {
         width: 18px;
         height: 18px;
@@ -484,21 +741,211 @@
       }
 
       /* 调整行标签 */
-      [class^="rowLabel"] {
-        width: 25px;
-        margin-right: 8px;
-        font-size: 0.8rem;
+      .row-label {
+        width: 20px;
+        margin-right: 6px;
+        font-size: 0.75rem;
       }
 
       /* 调整单词容器 */
-      [class^="wordContainer"] {
-        margin-left: 8px;
+      .word-container {
+        margin-left: 3px;
       }
 
       /* 调整单词索引单元格 */
-      [class^="wordIndexCell"] {
-        width: 35px;
+      .word-index-cell {
+        width: 30px;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* 超小屏幕设备 */
+    @media (max-width: 320px) {
+      .container {
+        padding: 10px 6px;
+        margin: 5px auto;
+      }
+
+      h1 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 20px;
+      }
+
+      .dotmap-container {
+        padding: 10px 6px;
+      }
+
+      .word-index {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
+        margin-right: 6px;
+      }
+
+      .word-text {
         font-size: 0.85rem;
+      }
+
+      .word-details {
+        padding-left: 30px;
+        font-size: 0.75rem;
+      }
+
+      /* 超小屏幕的点阵图调整 */
+      .binary-values-row {
+        margin-left: 20px;
+      }
+
+      .binary-values {
+        margin-left: 20px;
+      }
+
+      .grid-container {
+        margin-left: 20px;
+      }
+
+      .grid-cell {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+        margin-right: 1px;
+      }
+
+      .grid-dot {
+        width: 8px;
+        height: 8px;
+      }
+
+      .row-label {
+        width: 16px;
+        margin-right: 4px;
+        font-size: 0.7rem;
+      }
+
+      .word-container {
+        margin-left: 2px;
+      }
+
+      .word-index-cell {
+        width: 25px;
+        font-size: 0.75rem;
+      }
+
+      button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+
+      .action-button {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+      }
+
+      .action-button i {
+        margin-right: 3px;
+      }
+    }
+
+    /* 超宽屏幕设备 */
+    @media (min-width: 1440px) {
+      .container {
+        max-width: 1200px;
+        margin: 60px auto;
+        padding: 48px 40px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+      }
+
+      .grid-cell {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+      }
+
+      .grid-dot {
+        width: 16px;
+        height: 16px;
+      }
+
+      .word-index {
+        width: 48px;
+        height: 48px;
+      }
+
+      .word-text {
+        font-size: 1.4rem;
+      }
+
+      /* 优化超宽屏幕下的按钮和输入框 */
+      button {
+        padding: 14px 32px;
+        font-size: 1.2rem;
+      }
+
+      textarea {
+        font-size: 1.15rem;
+        padding: 16px;
+      }
+
+      .output {
+        padding: 28px 24px;
+      }
+
+      .dotmap-container {
+        padding: 28px;
+      }
+    }
+
+    /* 针对可折叠设备的优化 - 展开状态 */
+    @media (min-width: 601px) and (max-width: 880px) {
+      .container {
+        padding: 22px 18px;
+        margin: 18px auto;
+      }
+
+      .grid-sections-container {
+        flex-wrap: wrap;
+      }
+
+      .grid-section {
+        margin-bottom: 12px;
+      }
+
+      /* 调整展开状态下的点阵图显示 */
+      .binary-values-row {
+        margin-left: 38px;
+      }
+
+      .binary-values {
+        margin-left: 38px;
+      }
+
+      .grid-container {
+        margin-left: 38px;
+      }
+
+      .grid-cell {
+        width: 26px;
+        height: 26px;
+        min-width: 26px;
+      }
+
+      .grid-dot {
+        width: 14px;
+        height: 14px;
       }
     }
 
@@ -509,6 +956,27 @@
       border-radius: 12px;
       padding: 20px;
       border: 1px solid var(--border-color);
+    }
+
+    /* 通知样式 */
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: opacity 0.5s ease;
+    }
+
+    .notification-success {
+      background-color: var(--secondary-color);
+    }
+
+    .notification-error {
+      background-color: #ef4444;
     }
 
     .radio-group {
@@ -538,6 +1006,190 @@
     #generateRandomBtn:hover {
       background: #0da271;
       box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+    }
+
+    /* 横屏模式优化 */
+    @media (orientation: landscape) and (max-height: 600px) {
+      .container {
+        margin: 10px auto;
+        padding: 15px 20px;
+      }
+
+      .header {
+        margin-bottom: 15px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+      }
+
+      .subtitle {
+        margin-bottom: 15px;
+      }
+
+      .input-container {
+        margin-bottom: 15px;
+      }
+
+      textarea {
+        height: 80px;
+      }
+
+      .generate-options {
+        margin-bottom: 15px;
+        padding: 15px;
+      }
+
+      .buttons-container {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 15px;
+      }
+
+      .output {
+        margin-top: 15px;
+        padding: 15px;
+      }
+
+      .dotmap-container {
+        padding: 15px;
+      }
+
+      /* 横屏模式下的点阵图布局优化 */
+      .grid-sections-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+
+      /* 改善横屏模式下的点阵图显示 */
+      .binary-values-row {
+        margin-left: 35px;
+      }
+
+      .binary-values {
+        margin-left: 35px;
+      }
+
+      .grid-container {
+        margin-left: 35px;
+      }
+
+      /* 优化横屏模式下的按钮布局 */
+      .action-button {
+        padding: 5px 10px;
+      }
+
+      /* 优化横屏模式下的单词信息显示 */
+      .word-info {
+        margin-bottom: 10px;
+      }
+    }
+
+    /* 针对平板电脑的横屏模式优化 */
+    @media (orientation: landscape) and (min-height: 601px) and (max-height: 800px) {
+      .container {
+        margin: 20px auto;
+        padding: 20px 25px;
+      }
+
+      /* 优化平板横屏模式下的布局 */
+      .grid-sections-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      .grid-section {
+        margin-bottom: 15px;
+      }
+
+      /* 调整平板横屏模式下的点阵图显示 */
+      .binary-values-row {
+        margin-left: 40px;
+      }
+
+      .binary-values {
+        margin-left: 40px;
+      }
+
+      .grid-container {
+        margin-left: 40px;
+      }
+    }
+
+    /* 深色模式支持 */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #3b82f6;
+        --primary-dark: #2563eb;
+        --secondary-color: #10b981;
+        --text-color: #e2e8f0;
+        --light-text: #94a3b8;
+        --background: #0f172a;
+        --card-bg: #1e293b;
+        --border-color: #334155;
+        --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--background) 0%, #1a2234 100%);
+      }
+
+      textarea {
+        background: #1a2234;
+        color: var(--text-color);
+      }
+
+      textarea:focus {
+        background: #1e293b;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+      }
+
+      .action-button:hover {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+
+      .grid-cell:hover {
+        background-color: rgba(16, 185, 129, 0.1);
+      }
+
+      /* 增强深色模式下的对比度和可读性 */
+      .output {
+        background: #1a2234;
+        border-color: #334155;
+      }
+
+      .dotmap-container {
+        background: #1e293b;
+        border-color: #334155;
+      }
+
+      .generate-options {
+        background: #1a2234;
+        border-color: #334155;
+      }
+
+      /* 改善深色模式下的按钮样式 */
+      button {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      button:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      }
+
+      /* 优化深色模式下的点阵图显示 */
+      .grid-cell {
+        border-color: #334155;
+      }
+
+      .grid-dot {
+        box-shadow: 0 1px 3px rgba(16, 185, 129, 0.5);
+      }
     }
   </style>
 </head>
@@ -731,16 +1383,9 @@
     function showNotification(message, isError = false) {
       const notification = document.createElement('div');
       notification.textContent = message;
-      notification.style.position = 'fixed';
-      notification.style.bottom = '20px';
-      notification.style.right = '20px';
-      notification.style.padding = '10px 20px';
-      notification.style.borderRadius = '5px';
-      notification.style.color = 'white';
-      notification.style.backgroundColor = isError ? '#ef4444' : '#10b981';
-      notification.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-      notification.style.zIndex = '1000';
-      notification.style.transition = 'opacity 0.5s ease';
+      notification.classList.add('notification');
+      notification.classList.add(isError ? 'notification-error' : 'notification-success');
+
 
       document.body.appendChild(notification);
 
@@ -785,47 +1430,22 @@
       // 定义二进制位的值
       const powers = [2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1];
 
-      // 检测是否为小屏幕设备
-      const isSmallScreen = window.innerWidth <= 480;
-      const isVerySmallScreen = window.innerWidth <= 375;
-
-      // 根据屏幕大小设置尺寸
-      const cellWidth = isVerySmallScreen ? '18px' : (isSmallScreen ? '22px' : '28px');
-      const cellHeight = isVerySmallScreen ? '18px' : (isSmallScreen ? '22px' : '28px');
-      const dotSize = isVerySmallScreen ? '10px' : (isSmallScreen ? '12px' : '14px');
-      const marginLeft = isVerySmallScreen ? '35px' : (isSmallScreen ? '45px' : '55px');
-      const marginRight = isVerySmallScreen ? '8px' : (isSmallScreen ? '10px' : '15px');
-      const fontSize = isVerySmallScreen ? '0.8rem' : (isSmallScreen ? '0.9rem' : '1rem');
-
       // 创建表格容器
       const tableContainer = document.createElement('div');
       tableContainer.className = 'dotmap-container';
 
       // 添加二进制位的值（只在第一行添加）
       const binaryValuesRow = document.createElement('div');
-      binaryValuesRow.style.display = 'flex';
-      binaryValuesRow.style.marginBottom = '5px';
-      binaryValuesRow.style.marginLeft = marginLeft;
+      binaryValuesRow.className = 'binary-values-row';
 
       powers.forEach((power, i) => {
         const valueCell = document.createElement('div');
         valueCell.textContent = power;
-        valueCell.style.width = cellWidth;
-        valueCell.style.textAlign = 'center';
-        valueCell.style.fontSize = fontSize;
-        valueCell.style.color = 'var(--light-text)';
-        valueCell.style.fontWeight = '500';
-        valueCell.style.writingMode = 'vertical-rl';
-        valueCell.style.transform = 'rotate(180deg)';
-        valueCell.style.height = isSmallScreen ? '40px' : '60px';
-        valueCell.style.boxSizing = 'border-box';
-        valueCell.style.display = 'flex';
-        valueCell.style.alignItems = 'center';
-        valueCell.style.justifyContent = 'flex-start';
+        valueCell.className = 'binary-value-cell';
 
         // 每4个单元格后添加间隙（除了最后一个）
         if ((i + 1) % 4 === 0 && i < powers.length - 1) {
-          valueCell.style.marginRight = marginRight;
+          valueCell.classList.add('binary-value-cell-gap');
         }
 
         binaryValuesRow.appendChild(valueCell);
@@ -846,30 +1466,16 @@
 
         // 创建行
         const row = document.createElement('div');
-        row.style.display = 'flex';
-        row.style.alignItems = 'center';
-
-        // 在小屏幕上添加横向滚动
-        if (isSmallScreen) {
-          row.style.minWidth = 'max-content';
-        }
+        row.className = 'word-row';
 
         // 每4个单词添加间隙（除了第一组）
         if (rowIndex > 0 && rowIndex % 4 === 0) {
-          row.style.marginTop = isVerySmallScreen ? '10px' : '15px';
+          row.classList.add('word-row-gap');
         }
 
         // 添加行标签（序号）
         const rowLabel = document.createElement('div');
-        rowLabel.className = 'rowLabel';
-        rowLabel.style.width = isVerySmallScreen ? '25px' : (isSmallScreen ? '30px' : '40px');
-        rowLabel.style.marginRight = marginRight;
-        rowLabel.style.display = 'flex';
-        rowLabel.style.justifyContent = 'center';
-        rowLabel.style.alignItems = 'center';
-        rowLabel.style.fontSize = isVerySmallScreen ? '0.8rem' : (isSmallScreen ? '0.85rem' : '0.9rem');
-        rowLabel.style.color = 'var(--light-text)';
-        rowLabel.style.fontWeight = '500';
+        rowLabel.className = 'row-label';
         rowLabel.textContent = rowIndex + 1;
         row.appendChild(rowLabel);
 
@@ -877,34 +1483,16 @@
         powers.forEach((_, i) => {
           const cell = document.createElement('div');
           cell.className = 'grid-cell';
-          cell.style.width = cellWidth;
-          cell.style.height = cellHeight;
-          cell.style.border = '1px solid var(--border-color)';
-          cell.style.display = 'flex';
-          cell.style.alignItems = 'center';
-          cell.style.justifyContent = 'center';
-          cell.style.borderRadius = '4px';
-          cell.style.margin = '0';
-          cell.style.boxSizing = 'border-box';
-
-          // 确保单元格不会缩小
-          cell.style.minWidth = cellWidth;
-          cell.style.minHeight = cellHeight;
 
           // 每4个单元格后添加间隙（除了最后一个）
           if ((i + 1) % 4 === 0 && i < powers.length - 1) {
-            cell.style.marginRight = marginRight;
+            cell.classList.add('grid-cell-gap');
           }
 
           // 如果位为1，添加一个点
           if (binaryArray[i]) {
             const dot = document.createElement('div');
             dot.className = 'grid-dot';
-            dot.style.width = dotSize;
-            dot.style.height = dotSize;
-            dot.style.borderRadius = '50%';
-            dot.style.backgroundColor = 'var(--secondary-color)';
-            dot.style.boxShadow = '0 1px 3px rgba(16, 185, 129, 0.3)';
             cell.appendChild(dot);
           }
 
@@ -913,27 +1501,17 @@
 
         // 添加单词索引和文本
         const wordContainer = document.createElement('div');
-        wordContainer.className = 'wordContainer';
-        wordContainer.style.display = 'flex';
-        wordContainer.style.alignItems = 'center';
-        wordContainer.style.marginLeft = isVerySmallScreen ? '8px' : (isSmallScreen ? '10px' : '15px');
+        wordContainer.className = 'word-container';
 
         // 添加单词索引
         const wordIndexCell = document.createElement('div');
-        wordIndexCell.className = 'wordIndexCell';
-        wordIndexCell.style.marginRight = isVerySmallScreen ? '5px' : (isSmallScreen ? '8px' : '10px');
-        wordIndexCell.style.fontSize = fontSize;
-        wordIndexCell.style.fontWeight = '500';
-        wordIndexCell.style.color = 'var(--light-text)';
-        wordIndexCell.style.width = isVerySmallScreen ? '35px' : (isSmallScreen ? '40px' : '45px'); // 设置固定宽度
-        wordIndexCell.style.textAlign = 'right'; // 右对齐
+        wordIndexCell.className = 'word-index-cell';
         wordIndexCell.textContent = index + 1; // 索引值从0开始，显示时+1
         wordContainer.appendChild(wordIndexCell);
 
         // 添加单词文本
         const wordCell = document.createElement('div');
-        wordCell.style.fontSize = fontSize;
-        wordCell.style.fontWeight = '500';
+        wordCell.className = 'word-text-cell';
         wordCell.textContent = word;
         wordContainer.appendChild(wordCell);
 
@@ -947,21 +1525,16 @@
       // 处理无效单词
       if (invalidWords.length > 0) {
         const invalidWordsContainer = document.createElement('div');
-        invalidWordsContainer.className = 'dotmap-container';
-        invalidWordsContainer.style.marginTop = '20px';
+        invalidWordsContainer.className = 'dotmap-container invalid-words-container';
 
         const invalidTitle = document.createElement('div');
-        invalidTitle.style.fontSize = '1.1rem';
-        invalidTitle.style.fontWeight = '600';
-        invalidTitle.style.marginBottom = '10px';
-        invalidTitle.style.color = '#ef4444';
+        invalidTitle.className = 'invalid-title';
         invalidTitle.textContent = '无效的单词：';
         invalidWordsContainer.appendChild(invalidTitle);
 
         invalidWords.forEach(word => {
           const wordElement = document.createElement('div');
-          wordElement.style.marginBottom = '5px';
-          wordElement.style.color = '#ef4444';
+          wordElement.className = 'invalid-word';
           wordElement.textContent = `"${word}" - 未找到该词`;
           invalidWordsContainer.appendChild(wordElement);
         });
