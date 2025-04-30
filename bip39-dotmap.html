@@ -44,10 +44,6 @@
       justify-content: flex-start;
     }
 
-    .binary-value-cell-gap {
-      margin-right: 15px;
-    }
-
     .word-row {
       display: flex;
       align-items: center;
@@ -124,6 +120,7 @@
       box-sizing: border-box;
       min-width: 28px;
       min-height: 28px;
+      transition: all 0.2s ease;
     }
 
     .grid-cell-gap {
@@ -449,17 +446,6 @@
       font-weight: 500;
     }
 
-    .grid-cell {
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 4px;
-      transition: all 0.2s ease;
-    }
-
     .grid-cell:hover {
       background-color: rgba(16, 185, 129, 0.05);
     }
@@ -514,10 +500,6 @@
 
       .grid-section {
         margin-bottom: 10px;
-      }
-
-      .binary-values-row {
-        margin-left: 45px;
       }
 
       .binary-values {
@@ -588,7 +570,7 @@
 
       /* 改善手机的点阵图显示 */
       .binary-values-row {
-        margin-left: 30px;
+        margin-left: 20px;
       }
 
       .binary-values {
@@ -610,6 +592,14 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         font-size: 0.85rem;
+      }
+
+      .grid-cell-gap {
+        margin-right: 6px;
+      }
+
+      .word-row-gap {
+        margin-top: 6px;
       }
 
       .dotmap-container {
@@ -643,6 +633,24 @@
         margin-left: -10px;
         margin-right: -10px;
         width: calc(100% + 20px);
+      }
+
+      .binary-value-cell {
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+        min-height: 18px;
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--light-text);
+        font-weight: 500;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        height: 60px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
       }
 
       .grid-cell {
@@ -1156,7 +1164,7 @@
 
         // 每4个单元格后添加间隙（除了最后一个）
         if ((i + 1) % 4 === 0 && i < powers.length - 1) {
-          valueCell.classList.add('binary-value-cell-gap');
+          valueCell.classList.add('grid-cell-gap');
         }
 
         binaryValuesRow.appendChild(valueCell);
