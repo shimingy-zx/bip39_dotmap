@@ -11,12 +11,15 @@
       --primary-color: #3b82f6;
       --primary-dark: #2563eb;
       --secondary-color: #10b981;
+      --secondary-dark: #059669;
       --text-color: #1e293b;
       --light-text: #64748b;
       --background: #f8fafc;
       --card-bg: #ffffff;
       --border-color: #e2e8f0;
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      --transition-speed: 0.3s;
+      --dot-gradient: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
     }
 
     /* 点阵图生成器样式 */
@@ -48,6 +51,50 @@
     .word-row {
       display: flex;
       align-items: center;
+      transition: background-color var(--transition-speed) ease;
+    }
+
+    .word-row:hover {
+      background-color: rgba(16, 185, 129, 0.05);
+      cursor: pointer;
+    }
+
+    .word-row.highlighted {
+      background-color: rgba(16, 185, 129, 0.1);
+      animation: highlight-pulse 2s infinite alternate;
+    }
+
+    @keyframes highlight-pulse {
+      0% {
+        background-color: rgba(16, 185, 129, 0.05);
+      }
+
+      100% {
+        background-color: rgba(16, 185, 129, 0.15);
+      }
+    }
+
+    .word-text-cell.highlighted {
+      color: var(--secondary-color);
+      font-weight: 700;
+    }
+
+    .grid-dot.highlighted {
+      transform: scale(1.2);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.5);
+      animation: dot-pulse 1.5s infinite alternate;
+    }
+
+    @keyframes dot-pulse {
+      0% {
+        transform: scale(1.1);
+        opacity: 0.9;
+      }
+
+      100% {
+        transform: scale(1.3);
+        opacity: 1;
+      }
     }
 
     .word-row-gap {
@@ -87,8 +134,9 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background-color: var(--secondary-color);
+      background: var(--dot-gradient);
       box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+      transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, opacity var(--transition-speed) ease;
     }
 
     .word-container {
@@ -309,7 +357,13 @@
       margin-bottom: 20px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
       border: 1px solid var(--border-color);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dotmap-container:nth-child(even) {
+      background: linear-gradient(to right, var(--card-bg), var(--card-bg) 98%, rgba(16, 185, 129, 0.1));
     }
 
     .dotmap-container:hover {
@@ -414,6 +468,7 @@
 
     .grid-cell:hover .grid-dot {
       transform: scale(1.2);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.5);
     }
 
     .grid-section {
@@ -613,12 +668,12 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      padding: 10px 20px;
-      border-radius: 5px;
+      padding: 12px 24px;
+      border-radius: 8px;
       color: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       z-index: 1000;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.5s ease, transform 0.3s ease;
     }
 
     .notification-success {
@@ -648,17 +703,82 @@
     }
 
     #generateRandomBtn {
-      background: var(--secondary-color);
+      background: var(--dot-gradient);
       box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
       width: 100%;
+      position: relative;
+      overflow: hidden;
     }
 
     #generateRandomBtn:hover {
-      background: #0da271;
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 70%);
       box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
     }
 
+    /* 按钮生成动画 */
+    .generating {
+      position: relative;
+    }
+
+    .generating::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: generating 1s ease;
+    }
+
+    @keyframes generating {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    /* 主题切换 */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      z-index: 100;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(30deg);
+    }
+
     /* 深色模式支持 */
+    .dark-mode {
+      --primary-color: #3b82f6;
+      --primary-dark: #2563eb;
+      --secondary-color: #10b981;
+      --secondary-dark: #059669;
+      --text-color: #e2e8f0;
+      --light-text: #94a3b8;
+      --background: #0f172a;
+      --card-bg: #1e293b;
+      --border-color: #334155;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      --dot-gradient: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+    }
+
     @media (prefers-color-scheme: dark) {
       :root {
         --primary-color: #3b82f6;
@@ -734,6 +854,9 @@
 </head>
 
 <body>
+  <div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </div>
   <div class="container">
     <div class="header">
       <h1>BIP39 Dotmap Generator</h1>
@@ -780,6 +903,32 @@
   </div>
 
   <script>
+    // 主题切换功能
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    // 检查本地存储中的主题设置
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      themeIcon.classList.remove('fa-moon');
+      themeIcon.classList.add('fa-sun');
+    }
+
+    // 主题切换事件监听
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+
+      if (document.body.classList.contains('dark-mode')) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        localStorage.setItem('darkMode', 'true');
+      } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        localStorage.setItem('darkMode', 'false');
+      }
+    });
+
     // 示例助记词
     const exampleMnemonic = "drastic course decrease inside close observe slam coral alarm anchor ignore tank";
 
@@ -924,15 +1073,25 @@
       notification.textContent = message;
       notification.classList.add('notification');
       notification.classList.add(isError ? 'notification-error' : 'notification-success');
-
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateY(20px)';
 
       document.body.appendChild(notification);
 
+      // 使用requestAnimationFrame确保DOM更新后再添加过渡效果
+      requestAnimationFrame(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateY(0)';
+      });
+
       setTimeout(() => {
         notification.style.opacity = '0';
-        setTimeout(() => {
-          document.body.removeChild(notification);
-        }, 500);
+        notification.style.transform = 'translateY(20px)';
+        notification.addEventListener('transitionend', function () {
+          if (document.body.contains(notification)) {
+            document.body.removeChild(notification);
+          }
+        });
       }, 3000);
     }
 
@@ -943,7 +1102,49 @@
     }
 
 
+    // 单词与点阵图联动高亮 - 增强版
+    function highlightWordAndDots(wordIndex, dotIndex) {
+      // 移除所有高亮
+      document.querySelectorAll('.word-row').forEach(el => {
+        el.classList.remove('highlighted');
+      });
+      document.querySelectorAll('.word-text-cell').forEach(el => {
+        el.classList.remove('highlighted');
+      });
+      document.querySelectorAll('.grid-dot').forEach(el => {
+        el.classList.remove('highlighted');
+      });
+
+      // 高亮选中的单词行
+      const wordRows = document.querySelectorAll('.word-row');
+      if (wordIndex >= 0 && wordIndex < wordRows.length) {
+        const wordRow = wordRows[wordIndex];
+        wordRow.classList.add('highlighted');
+
+        // 高亮单词文本
+        const wordTextCell = wordRow.querySelector('.word-text-cell');
+        if (wordTextCell) {
+          wordTextCell.classList.add('highlighted');
+        }
+
+        // 高亮对应的点
+        const dots = wordRow.querySelectorAll('.grid-dot');
+        dots.forEach(dot => {
+          dot.classList.add('highlighted');
+        });
+      }
+    }
+
     function generateDotmap() {
+      // 添加生成动画
+      const generateBtn = document.getElementById('generateBtn');
+      generateBtn.classList.add('generating');
+      generateBtn.disabled = true;
+
+      setTimeout(() => {
+        generateBtn.classList.remove('generating');
+        generateBtn.disabled = false;
+      }, 800);
       const input = document.getElementById('mnemonicInput').value.trim().toLowerCase();
       if (!input) {
         showNotification('请输入助记词', true);
@@ -1053,6 +1254,25 @@
         wordCell.className = 'word-text-cell';
         wordCell.textContent = word;
         wordContainer.appendChild(wordCell);
+
+        // 添加鼠标悬停和点击事件
+        row.addEventListener('mouseenter', function () {
+          highlightWordAndDots(rowIndex, index);
+        });
+        row.addEventListener('mouseleave', function () {
+          highlightWordAndDots(-1, -1);
+        });
+
+        // 添加点击事件以保持高亮状态
+        row.addEventListener('click', function () {
+          // 如果行已经高亮，则取消高亮
+          if (this.classList.contains('highlighted')) {
+            highlightWordAndDots(-1, -1);
+          } else {
+            // 否则高亮当前行
+            highlightWordAndDots(rowIndex, index);
+          }
+        });
 
         row.appendChild(wordContainer);
 
