@@ -779,6 +779,15 @@
       --dot-gradient: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
     }
 
+    .dark-mode textarea {
+      background: #1a2234;
+      color: var(--text-color);
+    }
+
+    .dark-mode textarea::placeholder {
+      color: var(--light-text);
+    }
+
     @media (prefers-color-scheme: dark) {
       :root {
         --primary-color: #3b82f6;
@@ -799,6 +808,10 @@
       textarea {
         background: #1a2234;
         color: var(--text-color);
+      }
+
+      textarea::placeholder {
+        color: var(--light-text);
       }
 
       textarea:focus {
@@ -893,9 +906,6 @@
     <div class="output" id="output">
       <div class="output-header" id="outputHeader" style="display: none;">
         <div class="output-title">点阵图结果</div>
-        <div class="output-actions">
-          <button class="action-button" id="copyBtn"><i class="fas fa-copy"></i>复制</button>
-        </div>
       </div>
       <div id="outputContent"></div>
     </div>
@@ -1012,17 +1022,6 @@
       document.getElementById('outputContent').innerHTML = '';
       document.getElementById('outputHeader').style.display = 'none';
     }
-
-    // 复制到剪贴板
-    document.getElementById('copyBtn').addEventListener('click', async () => {
-      try {
-        const outputHtml = document.getElementById('outputContent').innerHTML;
-        await navigator.clipboard.writeText(outputHtml);
-        showNotification('已复制到剪贴板');
-      } catch (err) {
-        showNotification('复制失败，请重试', true);
-      }
-    });
 
 
 
