@@ -157,6 +157,11 @@
     .word-text-cell {
       font-size: 1rem;
       font-weight: 500;
+      width: 80px;
+      max-width: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .invalid-words-container {
@@ -597,8 +602,13 @@
       }
 
       .row-label {
-        width: 25px;
         margin-right: 8px;
+        width: 12px;
+        max-width: 12px;
+        min-width: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         font-size: 0.85rem;
       }
 
@@ -636,14 +646,15 @@
       }
 
       .grid-cell {
-        width: 22px;
-        height: 22px;
-        min-width: 22px;
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+        min-height: 18px;
       }
 
       .grid-dot {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
       }
 
       .word-container {
