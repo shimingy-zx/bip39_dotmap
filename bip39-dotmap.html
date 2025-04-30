@@ -895,7 +895,6 @@
         <div class="output-title">点阵图结果</div>
         <div class="output-actions">
           <button class="action-button" id="copyBtn"><i class="fas fa-copy"></i>复制</button>
-          <button class="action-button" id="saveBtn"><i class="fas fa-download"></i>保存</button>
         </div>
       </div>
       <div id="outputContent"></div>
@@ -1025,47 +1024,7 @@
       }
     });
 
-    // 保存为HTML文件
-    document.getElementById('saveBtn').addEventListener('click', () => {
-      const outputHtml = document.getElementById('outputContent').innerHTML;
-      const fullHtml = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="UTF-8">
-          <title>BIP39 Dotmap</title>
-          <style>
-            body { font-family: Arial, sans-serif; }
-            .dotmap-container { margin-bottom: 20px; padding: 15px; border: 1px solid #eee; }
-            .word-info { display: flex; align-items: center; margin-bottom: 10px; }
-            .word-index { background: #10b981; color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; }
-            .word-text { font-size: 1.1rem; font-weight: 500; }
-            .grid-sections-container { display: flex; margin-top: 10px; }
-            .grid-section { margin-right: 15px; }
-            .grid-row { display: flex; margin-bottom: 3px; }
-            .grid-cell { width: 25px; height: 25px; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; }
-            .grid-dot { width: 12px; height: 12px; border-radius: 50%; background-color: #10b981; }
-          </style>
-        </head>
-        <body>
-          <h1>BIP39 Dotmap</h1>
-          <div>${outputHtml}</div>
-        </body>
-        </html>
-      `;
 
-      const blob = new Blob([fullHtml], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'bip39-dotmap.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-
-      showNotification('已保存为HTML文件');
-    });
 
     // 显示通知
     function showNotification(message, isError = false) {
