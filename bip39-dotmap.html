@@ -467,7 +467,7 @@
       }
     }
 
-    /* 大型手机和小型平板 */
+    /* 手机屏幕 */
     @media (max-width: 768px) {
       .container {
         padding: 24px 16px;
@@ -524,108 +524,7 @@
         justify-content: space-between;
       }
 
-      /* 改善平板和大型手机的点阵图显示 */
-      .binary-values-row {
-        margin-left: 40px;
-      }
-
-      .binary-values {
-        margin-left: 40px;
-      }
-
-      .grid-container {
-        margin-left: 40px;
-      }
-
-      .row-label {
-        width: 35px;
-        margin-right: 10px;
-      }
-
-      .word-container {
-        margin-left: 10px;
-      }
-    }
-
-    /* 折叠屏和中型手机 */
-    @media (max-width: 600px) and (min-width: 481px) {
-      .container {
-        padding: 20px 14px;
-        margin: 15px auto;
-      }
-
-      h1 {
-        font-size: 1.4rem;
-      }
-
-      .word-info {
-        flex-wrap: wrap;
-      }
-
-      .binary-values-row {
-        margin-left: 35px;
-      }
-
-      .binary-values {
-        margin-left: 35px;
-        overflow-x: auto;
-        padding-bottom: 5px;
-      }
-
-      .grid-container {
-        margin-left: 35px;
-      }
-
-      .row-label {
-        width: 30px;
-        margin-right: 8px;
-      }
-
-      .dotmap-container {
-        padding: 18px 14px;
-        overflow-x: auto;
-      }
-
-      /* 改善折叠屏点阵图显示 */
-      .grid-cell {
-        width: 24px;
-        height: 24px;
-        min-width: 24px;
-      }
-
-      .grid-dot {
-        width: 13px;
-        height: 13px;
-      }
-
-      .word-container {
-        margin-left: 8px;
-      }
-    }
-
-    /* 小型手机 */
-    @media (max-width: 480px) {
-      .container {
-        padding: 16px 12px;
-        margin: 10px auto;
-      }
-
-      h1 {
-        font-size: 1.3rem;
-      }
-
-      .word-info {
-        flex-wrap: wrap;
-      }
-
-      .word-details {
-        margin-left: 0;
-        margin-top: 5px;
-        width: 100%;
-        text-align: left;
-        padding-left: 45px;
-      }
-
+      /* 改善手机的点阵图显示 */
       .binary-values-row {
         margin-left: 30px;
       }
@@ -651,6 +550,18 @@
         overflow-x: auto;
       }
 
+      .word-info {
+        flex-wrap: wrap;
+      }
+
+      .word-details {
+        margin-left: 0;
+        margin-top: 5px;
+        width: 100%;
+        text-align: left;
+        padding-left: 45px;
+      }
+
       .word-index {
         width: 36px;
         height: 36px;
@@ -667,7 +578,6 @@
         width: calc(100% + 20px);
       }
 
-      /* 改善移动端点阵图显示 */
       .grid-cell {
         width: 22px;
         height: 22px;
@@ -689,267 +599,7 @@
       }
     }
 
-    /* 针对更小屏幕的设备（如iPhone SE等） */
-    @media (max-width: 375px) {
-      .container {
-        padding: 12px 8px;
-      }
-
-      .dotmap-container {
-        padding: 12px 8px;
-      }
-
-      .word-index {
-        width: 28px;
-        height: 28px;
-        font-size: 0.85rem;
-        margin-right: 8px;
-      }
-
-      .word-text {
-        font-size: 0.9rem;
-      }
-
-      .word-details {
-        padding-left: 36px;
-        font-size: 0.8rem;
-      }
-
-      /* 更小屏幕的点阵图调整 */
-      .binary-values-row {
-        margin-left: 25px;
-      }
-
-      .binary-values {
-        margin-left: 25px;
-      }
-
-      .grid-container {
-        margin-left: 25px;
-      }
-
-      .grid-cell {
-        width: 18px;
-        height: 18px;
-        min-width: 18px;
-        margin-right: 2px;
-      }
-
-      .grid-dot {
-        width: 10px;
-        height: 10px;
-      }
-
-      /* 调整行标签 */
-      .row-label {
-        width: 20px;
-        margin-right: 6px;
-        font-size: 0.75rem;
-      }
-
-      /* 调整单词容器 */
-      .word-container {
-        margin-left: 3px;
-      }
-
-      /* 调整单词索引单元格 */
-      .word-index-cell {
-        width: 30px;
-        font-size: 0.8rem;
-      }
-    }
-
-    /* 超小屏幕设备 */
-    @media (max-width: 320px) {
-      .container {
-        padding: 10px 6px;
-        margin: 5px auto;
-      }
-
-      h1 {
-        font-size: 1.1rem;
-        margin-bottom: 8px;
-      }
-
-      .subtitle {
-        font-size: 0.8rem;
-        margin-bottom: 20px;
-      }
-
-      .dotmap-container {
-        padding: 10px 6px;
-      }
-
-      .word-index {
-        width: 24px;
-        height: 24px;
-        font-size: 0.75rem;
-        margin-right: 6px;
-      }
-
-      .word-text {
-        font-size: 0.85rem;
-      }
-
-      .word-details {
-        padding-left: 30px;
-        font-size: 0.75rem;
-      }
-
-      /* 超小屏幕的点阵图调整 */
-      .binary-values-row {
-        margin-left: 20px;
-      }
-
-      .binary-values {
-        margin-left: 20px;
-      }
-
-      .grid-container {
-        margin-left: 20px;
-      }
-
-      .grid-cell {
-        width: 16px;
-        height: 16px;
-        min-width: 16px;
-        margin-right: 1px;
-      }
-
-      .grid-dot {
-        width: 8px;
-        height: 8px;
-      }
-
-      .row-label {
-        width: 16px;
-        margin-right: 4px;
-        font-size: 0.7rem;
-      }
-
-      .word-container {
-        margin-left: 2px;
-      }
-
-      .word-index-cell {
-        width: 25px;
-        font-size: 0.75rem;
-      }
-
-      button {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-      }
-
-      .action-button {
-        padding: 4px 8px;
-        font-size: 0.8rem;
-      }
-
-      .action-button i {
-        margin-right: 3px;
-      }
-    }
-
-    /* 超宽屏幕设备 */
-    @media (min-width: 1440px) {
-      .container {
-        max-width: 1200px;
-        margin: 60px auto;
-        padding: 48px 40px;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      .subtitle {
-        font-size: 1.2rem;
-        margin-bottom: 40px;
-      }
-
-      .grid-cell {
-        width: 32px;
-        height: 32px;
-        min-width: 32px;
-        min-height: 32px;
-      }
-
-      .grid-dot {
-        width: 16px;
-        height: 16px;
-      }
-
-      .word-index {
-        width: 48px;
-        height: 48px;
-      }
-
-      .word-text {
-        font-size: 1.4rem;
-      }
-
-      /* 优化超宽屏幕下的按钮和输入框 */
-      button {
-        padding: 14px 32px;
-        font-size: 1.2rem;
-      }
-
-      textarea {
-        font-size: 1.15rem;
-        padding: 16px;
-      }
-
-      .output {
-        padding: 28px 24px;
-      }
-
-      .dotmap-container {
-        padding: 28px;
-      }
-    }
-
-    /* 针对可折叠设备的优化 - 展开状态 */
-    @media (min-width: 601px) and (max-width: 880px) {
-      .container {
-        padding: 22px 18px;
-        margin: 18px auto;
-      }
-
-      .grid-sections-container {
-        flex-wrap: wrap;
-      }
-
-      .grid-section {
-        margin-bottom: 12px;
-      }
-
-      /* 调整展开状态下的点阵图显示 */
-      .binary-values-row {
-        margin-left: 38px;
-      }
-
-      .binary-values {
-        margin-left: 38px;
-      }
-
-      .grid-container {
-        margin-left: 38px;
-      }
-
-      .grid-cell {
-        width: 26px;
-        height: 26px;
-        min-width: 26px;
-      }
-
-      .grid-dot {
-        width: 14px;
-        height: 14px;
-      }
-    }
-
-    /* 合并的第二块样式 */
+    /* 通用样式 */
     .generate-options {
       margin-bottom: 25px;
       background: var(--background);
@@ -1006,117 +656,6 @@
     #generateRandomBtn:hover {
       background: #0da271;
       box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
-    }
-
-    /* 横屏模式优化 */
-    @media (orientation: landscape) and (max-height: 600px) {
-      .container {
-        margin: 10px auto;
-        padding: 15px 20px;
-      }
-
-      .header {
-        margin-bottom: 15px;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-        margin-bottom: 5px;
-      }
-
-      .subtitle {
-        margin-bottom: 15px;
-      }
-
-      .input-container {
-        margin-bottom: 15px;
-      }
-
-      textarea {
-        height: 80px;
-      }
-
-      .generate-options {
-        margin-bottom: 15px;
-        padding: 15px;
-      }
-
-      .buttons-container {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 15px;
-      }
-
-      .output {
-        margin-top: 15px;
-        padding: 15px;
-      }
-
-      .dotmap-container {
-        padding: 15px;
-      }
-
-      /* 横屏模式下的点阵图布局优化 */
-      .grid-sections-container {
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: 10px;
-      }
-
-      /* 改善横屏模式下的点阵图显示 */
-      .binary-values-row {
-        margin-left: 35px;
-      }
-
-      .binary-values {
-        margin-left: 35px;
-      }
-
-      .grid-container {
-        margin-left: 35px;
-      }
-
-      /* 优化横屏模式下的按钮布局 */
-      .action-button {
-        padding: 5px 10px;
-      }
-
-      /* 优化横屏模式下的单词信息显示 */
-      .word-info {
-        margin-bottom: 10px;
-      }
-    }
-
-    /* 针对平板电脑的横屏模式优化 */
-    @media (orientation: landscape) and (min-height: 601px) and (max-height: 800px) {
-      .container {
-        margin: 20px auto;
-        padding: 20px 25px;
-      }
-
-      /* 优化平板横屏模式下的布局 */
-      .grid-sections-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-      }
-
-      .grid-section {
-        margin-bottom: 15px;
-      }
-
-      /* 调整平板横屏模式下的点阵图显示 */
-      .binary-values-row {
-        margin-left: 40px;
-      }
-
-      .binary-values {
-        margin-left: 40px;
-      }
-
-      .grid-container {
-        margin-left: 40px;
-      }
     }
 
     /* 深色模式支持 */
